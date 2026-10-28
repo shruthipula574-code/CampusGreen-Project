@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Share and support sustainability ideas for your campus.">
+  <title>Campus Green Ideas Board</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#"><span class="brand-mark">🌿</span><span>Campus<span class="brand-light">Green</span><small>Ideas that grow</small></span></a>
+    <nav><a href="#ideas">Explore ideas</a><a href="#how">How it works</a></nav>
+    <div id="nav-auth" class="nav-auth"><button class="btn btn-outline" id="show-signin">Sign in</button><button class="btn btn-primary" id="show-signup">Join the board</button></div>
+  </header>
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <span class="eyebrow">A greener campus starts here</span>
+        <h1>Small ideas.<br><em>Big green change.</em></h1>
+        <p>Share practical sustainability ideas for our campus, support the ideas you love, and help turn good thoughts into real action.</p>
+        <div class="hero-actions"><a class="btn btn-primary" href="#ideas">Explore ideas <span>→</span></a><button class="btn btn-white" id="hero-submit">Share an idea +</button></div>
+        <div class="hero-stats"><div><strong id="stat-ideas">—</strong><span>Ideas shared</span></div><div><strong id="stat-votes">—</strong><span>Community votes</span></div><div><strong id="stat-done">—</strong><span>Ideas completed</span></div></div>
+      </div>
+      <div class="hero-art" aria-label="Illustration of a green campus"><div class="sun"></div><div class="hill hill-back"></div><div class="hill hill-front"></div><div class="building"><div class="roof"></div><div class="building-body"><i></i><i></i><i></i><i></i><i></i><i></i></div></div><div class="tree tree-one"><b></b><i></i></div><div class="tree tree-two"><b></b><i></i></div><div class="plant-pot">🌱</div><div class="art-note">Better campus,<br>better planet.</div></div>
+    </section>
+    <section class="how" id="how"><div><span class="eyebrow">From thought to impact</span><h2>Good things grow<br>when we grow together.</h2></div><div class="how-steps"><article><span>01</span><h3>Share</h3><p>Suggest a simple way to make campus more sustainable.</p></article><article><span>02</span><h3>Support</h3><p>Vote for ideas you want the campus community to try.</p></article><article><span>03</span><h3>Make it happen</h3><p>Track progress as ideas move from new to completed.</p></article></div></section>
+    <section class="ideas-section" id="ideas">
+      <div class="section-heading"><div><span class="eyebrow">The community board</span><h2>Ideas worth growing</h2><p>Explore suggestions from students across campus.</p></div><button class="btn btn-primary" id="submit-idea">＋ Post an idea</button></div>
+      <div class="toolbar"><div class="searchbox"><span>⌕</span><input id="search" type="search" placeholder="Search ideas..."></div><div class="filters"><select id="category-filter" aria-label="Filter by category"><option value="">All categories</option><option>Waste reduction</option><option>Energy saving</option><option>Water conservation</option><option>Green spaces</option><option>Transport</option><option>Other</option></select><select id="sort-filter" aria-label="Sort ideas"><option value="popular">Most supported</option><option value="newest">Newest first</option><option value="oldest">Oldest first</option></select><select id="status-filter" aria-label="Filter by status"><option value="">All statuses</option><option>New</option><option>Under review</option><option>In progress</option><option>Completed</option></select></div></div>
+      <div id="notice" class="notice" role="status" hidden></div>
+      <div id="ideas-grid" class="ideas-grid"><div class="loading">Growing the idea board…</div></div>
+      <div id="empty-state" class="empty-state" hidden><span>🌱</span><h3>No ideas found</h3><p>Try changing your filters, or be the first to share an idea.</p></div>
+    </section>
+    <section class="cta"><div><span class="eyebrow">Have an idea?</span><h2>Your next thought could<br>make a real difference.</h2><p>Every greener campus begins with someone who cares enough to suggest a change.</p></div><button class="btn btn-white" id="cta-submit">Share your idea <span>→</span></button><div class="cta-leaf">✳</div></section>
+  </main>
+  <footer><a class="brand footer-brand" href="#"><span class="brand-mark">🌿</span><span>Campus<span class="brand-light">Green</span><small>Ideas that grow</small></span></a><p>Made for a greener tomorrow. <span>© <span id="year"></span> Campus Green Ideas Board</span></p></footer>
+
+  <dialog id="auth-dialog" class="dialog">
+    <button class="dialog-close" data-close aria-label="Close">×</button>
+    <div class="dialog-icon">🌿</div><h2 id="auth-title">Welcome back</h2><p id="auth-subtitle">Sign in to support campus ideas.</p>
+    <form id="auth-form">
+      <label id="name-wrap" hidden>Full name<input id="auth-name" autocomplete="name" maxlength="80"></label>
+      <label>Email address<input id="auth-email" type="email" required autocomplete="email" maxlength="254"></label>
+      <label>Password<input id="auth-password" type="password" required minlength="8" autocomplete="current-password"></label>
+      <p id="auth-error" class="form-error" hidden></p><button class="btn btn-primary full-width" id="auth-submit" type="submit">Sign in</button>
+    </form>
+    <p class="switch-auth" id="auth-switch">New here? <button type="button" id="switch-to-signup">Create an account</button></p>
+  </dialog>
+
+  <dialog id="idea-dialog" class="dialog idea-dialog">
+    <button class="dialog-close" data-close aria-label="Close">×</button>
+    <div class="dialog-icon">🌱</div><h2>Plant an idea</h2><p>Share one practical change for a greener campus.</p>
+    <form id="idea-form">
+      <label>Idea title<input id="idea-title" required minlength="5" maxlength="120" placeholder="e.g. Add water refill stations"></label>
+      <label>What is your idea?<textarea id="idea-description" required minlength="20" maxlength="1500" rows="4" placeholder="Explain the problem and how your idea could help…"></textarea></label>
+      <label>Category<select id="idea-category" required><option value="">Choose a category</option><option>Waste reduction</option><option>Energy saving</option><option>Water conservation</option><option>Green spaces</option><option>Transport</option><option>Other</option></select></label>
+      <p id="idea-error" class="form-error" hidden></p><button class="btn btn-primary full-width" type="submit">Publish idea</button>
+    </form>
+  </dialog>
+  <dialog id="detail-dialog" class="dialog detail-dialog">
+    <button class="dialog-close" data-close aria-label="Close">×</button><div id="detail-content"></div>
+  </dialog>
+  <script src="app.js"></script>
+</body>
+</html>
